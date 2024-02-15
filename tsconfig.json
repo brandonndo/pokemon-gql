@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",                             /* Specify the root folder within your source files. */
+    "moduleResolution": "Bundler",                     /* Specify how TypeScript looks up a file from a given module specifier. */
+    "baseUrl": ".",
+    "isolatedModules": true,                          /* Ensure that each file can be safely transpiled without relying on other imports. */
+    "verbatimModuleSyntax": true,
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "strict": true,
+    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+  },
+  "types": ["node", "lodash"]
+}

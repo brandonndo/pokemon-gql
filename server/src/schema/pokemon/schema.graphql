@@ -1,0 +1,14 @@
+extend type Query {
+  pokemon: [Pokemon!]!
+  pokemon_by_pk(id: ID!): Pokemon
+  pokemon_by_name(name: String!): Pokemon
+}
+
+type Pokemon {
+  name: String!
+  url: String
+  id: ID
+  height: Int
+  weight: Int
+  base_experience: Int
+}
