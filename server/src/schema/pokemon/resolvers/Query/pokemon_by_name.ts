@@ -1,24 +1,21 @@
 import type { QueryResolvers } from "./../../../types.generated";
-export const apiUrl = "https://pokeapi.co/api/v2/pokemon/";
-
+import { apiUrl } from "./pokemon";
+import { fetchPokemonApi } from "./pokemon";
+import type {PokemonApiReturn} from "./pokemon"
 // interfaces: type checking the shape of values - aka duck typing / structural subtyping
-export interface PokemonAPIReturn {
-  name: string;
-  url: string;
-  id: number;
-  base_experience: number;
-  height: number;
-  weight: number;
-}
+// export interface PokemonAPIReturn {
+//   name: string;
+//   url: string;
+//   id: number;
+//   base_experience: number;
+//   height: number;
+//   weight: number;
+// }
 
-export const callPokemonApi = async <TData>(url: string): Promise<TData> => {
-  const response = await globalThis.fetch(url);
-  return response.json() as TData;
-};
 
 export const pokemon_by_name: NonNullable<QueryResolvers['pokemon_by_name']> = async (_parent, _arg, _ctx) => {
   /* Implement Query.pokemon_by_name resolver logic here */
-  const pokemonData = await callPokemonApi<PokemonAPIReturn>(
+  const pokemonData = await fetchPokemonApi<PokemonApiReturn>(
     `${apiUrl}/${_arg.name}`
   );
   console.log("pokemon data", pokemonData);

@@ -10,5 +10,4 @@
     "strict": true,
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
-  "types": ["node", "lodash"]
 }
