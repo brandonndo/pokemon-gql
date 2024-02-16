@@ -30,28 +30,18 @@ export const pokemon: NonNullable<QueryResolvers["pokemon"]> = async (
   // console.log(data);
   const PokemonList = await Promise.all(
     data.results.map(async (pokemon) => {
-      const pokemonDetails = await fetchPokemonApi<PokemonApiReturn>(`${apiUrl}/${pokemon.name}`);
-      return {...pokemon, ...pokemonDetails}
+      const pokemonDetails = await fetchPokemonApi<PokemonApiReturn>(
+        `${apiUrl}/${pokemon.name}`
+      );
+      return {
+        ...pokemon,
+        id: pokemonDetails.id,
+        height: pokemonDetails.height,
+        weight: pokemonDetails.weight,
+        base_experience: pokemonDetails.base_experience,
+      };
     })
   );
   console.log("list", PokemonList);
-    return PokemonList
+  return PokemonList;
 };
-// const PokemonList = Promise.all(
-//   data.results.map(async (pokemon) => {
-//     const pokemonDetails = await fetchPokemonApi<PokemonApiReturn>(
-//       `${apiUrl}/${pokemon.name}`
-//     );
-//     // console.log('details', pokemonDetails)
-//     return {
-//       name: pokemon.name,
-//       url: pokemon.url,
-//       id: pokemonDetails.id,
-//       height: pokemonDetails.height,
-//       weight: pokemonDetails.weight,
-//       base_experience: pokemonDetails.base_experience,
-//     };
-//   })
-// );
-// console.log("list", PokemonList);
-// return PokemonList;
