@@ -4,8 +4,8 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "start": "tsx server/src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsx server/src/server.ts"
   },
   "devDependencies": {
     "@eddeee888/gcg-typescript-resolver-files": "^0.7.2",
@@ -13,14 +13,13 @@
     "@graphql-codegen/cli": "^5.0.2",
     "@types/lodash": "^4.14.202",
     "eslint": "^8.56.0",
+    "nodemon": "^3.0.3",
     "prettier": "",
+    "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
     "typescript": "5.3.3",
     "typescript-eslint": "^7.0.1"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "nodemon": "^3.0.3"
-  }
+  "license": "ISC"
 }
