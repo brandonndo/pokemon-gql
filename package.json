@@ -22,7 +22,9 @@
     "utility-types": "^3.11.0"
   },
   "dependencies": {
-    "@apollo/server": "^4.10.0"
+    "@apollo/datasource-rest": "^6.2.2",
+    "@apollo/server": "^4.10.0",
+    "dataloader": "^2.2.2"
   },
   "author": "",
   "license": "ISC"
