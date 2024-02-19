@@ -1,6 +1,6 @@
 import type { QueryResolvers } from "./../../../types.generated";
 export const apiUrl = "https://pokeapi.co/api/v2/pokemon";
-import type { ContextValue } from "server/src/server";
+import type { ContextValue } from "../../../../server";
 
 
 export const fetchPokemonApi = async <TData>(url: string): Promise<TData> => {
