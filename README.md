@@ -1,1 +1,1 @@
-# pokemon-gql-next
+# pokemon-gql
