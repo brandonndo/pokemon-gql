@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import type { DeepPartial } from 'utility-types';
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -53,11 +54,10 @@ export type Species = {
 
 export type SpeciesDetails = {
   __typename?: 'SpeciesDetails';
-  is_legendary?: Maybe<Scalars['Boolean']['output']>;
+  is_legendary: Scalars['Boolean']['output'];
 };
 
-export type WithIndex<TObject> = TObject & Record<string, any>;
-export type ResolversObject<TObject> = WithIndex<TObject>;
+
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -127,30 +127,30 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = ResolversObject<{
-  Pokemon: ResolverTypeWrapper<Partial<Pokemon>>;
-  Int: ResolverTypeWrapper<Partial<Scalars['Int']['output']>>;
-  ID: ResolverTypeWrapper<Partial<Scalars['ID']['output']>>;
-  String: ResolverTypeWrapper<Partial<Scalars['String']['output']>>;
+export type ResolversTypes = {
+  Pokemon: ResolverTypeWrapper<DeepPartial<Pokemon>>;
+  Int: ResolverTypeWrapper<DeepPartial<Scalars['Int']['output']>>;
+  ID: ResolverTypeWrapper<DeepPartial<Scalars['ID']['output']>>;
+  String: ResolverTypeWrapper<DeepPartial<Scalars['String']['output']>>;
   Query: ResolverTypeWrapper<{}>;
-  Species: ResolverTypeWrapper<Partial<Species>>;
-  SpeciesDetails: ResolverTypeWrapper<Partial<SpeciesDetails>>;
-  Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']['output']>>;
-}>;
+  Species: ResolverTypeWrapper<DeepPartial<Species>>;
+  SpeciesDetails: ResolverTypeWrapper<DeepPartial<SpeciesDetails>>;
+  Boolean: ResolverTypeWrapper<DeepPartial<Scalars['Boolean']['output']>>;
+};
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = ResolversObject<{
-  Pokemon: Partial<Pokemon>;
-  Int: Partial<Scalars['Int']['output']>;
-  ID: Partial<Scalars['ID']['output']>;
-  String: Partial<Scalars['String']['output']>;
+export type ResolversParentTypes = {
+  Pokemon: DeepPartial<Pokemon>;
+  Int: DeepPartial<Scalars['Int']['output']>;
+  ID: DeepPartial<Scalars['ID']['output']>;
+  String: DeepPartial<Scalars['String']['output']>;
   Query: {};
-  Species: Partial<Species>;
-  SpeciesDetails: Partial<SpeciesDetails>;
-  Boolean: Partial<Scalars['Boolean']['output']>;
-}>;
+  Species: DeepPartial<Species>;
+  SpeciesDetails: DeepPartial<SpeciesDetails>;
+  Boolean: DeepPartial<Scalars['Boolean']['output']>;
+};
 
-export type PokemonResolvers<ContextType = any, ParentType extends ResolversParentTypes['Pokemon'] = ResolversParentTypes['Pokemon']> = ResolversObject<{
+export type PokemonResolvers<ContextType = any, ParentType extends ResolversParentTypes['Pokemon'] = ResolversParentTypes['Pokemon']> = {
   base_experience?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   height?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -159,30 +159,30 @@ export type PokemonResolvers<ContextType = any, ParentType extends ResolversPare
   url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   weight?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   pokemon?: Resolver<Array<ResolversTypes['Pokemon']>, ParentType, ContextType>;
   pokemon_by_name?: Resolver<Maybe<ResolversTypes['Pokemon']>, ParentType, ContextType, RequireFields<Querypokemon_by_nameArgs, 'name'>>;
   pokemon_by_pk?: Resolver<Maybe<ResolversTypes['Pokemon']>, ParentType, ContextType, RequireFields<Querypokemon_by_pkArgs, 'id'>>;
-}>;
+};
 
-export type SpeciesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Species'] = ResolversParentTypes['Species']> = ResolversObject<{
+export type SpeciesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Species'] = ResolversParentTypes['Species']> = {
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   speciesDetails?: Resolver<ResolversTypes['SpeciesDetails'], ParentType, ContextType>;
   url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
-export type SpeciesDetailsResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpeciesDetails'] = ResolversParentTypes['SpeciesDetails']> = ResolversObject<{
-  is_legendary?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+export type SpeciesDetailsResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpeciesDetails'] = ResolversParentTypes['SpeciesDetails']> = {
+  is_legendary?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
+};
 
-export type Resolvers<ContextType = any> = ResolversObject<{
+export type Resolvers<ContextType = any> = {
   Pokemon?: PokemonResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Species?: SpeciesResolvers<ContextType>;
   SpeciesDetails?: SpeciesDetailsResolvers<ContextType>;
-}>;
+};
 
