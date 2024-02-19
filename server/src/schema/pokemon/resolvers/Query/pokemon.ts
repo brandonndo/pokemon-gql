@@ -8,13 +8,18 @@ export interface PokemonApiReturn {
   height: number;
   weight: number;
   base_experience: number;
+  species: {
+    name: string;
+    url: string;
+    
+  };
 }
 
 export const fetchPokemonApi = async <TData>(url: string): Promise<TData> => {
   const response = await globalThis.fetch(url);
   return response.json() as TData;
 };
-export const pokemon: NonNullable<QueryResolvers["pokemon"]> = async (
+export const pokemon: NonNullable<QueryResolvers['pokemon']> = async (
   _parent,
   _arg,
   _ctx
@@ -30,17 +35,18 @@ export const pokemon: NonNullable<QueryResolvers["pokemon"]> = async (
   // console.log(data);
   const PokemonList = await Promise.all(
     data.results.map(async (pokemon) => {
-      const { id, height, weight, base_experience } =
+      const { id, height, weight, base_experience, species } =
         await fetchPokemonApi<PokemonApiReturn>(`${apiUrl}/${pokemon.name}`);
       return {
         id,
         height,
         weight,
         base_experience,
+        species,
         ...pokemon,
       };
     })
   );
-  console.log("list", PokemonList);
+  // console.log("list", PokemonList);
   return PokemonList;
 };

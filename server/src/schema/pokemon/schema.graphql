@@ -11,4 +11,10 @@ type Pokemon {
   height: Int!
   weight: Int!
   base_experience: Int!
+  species: Species!
+}
+
+type Species {
+  name: String!
+  url: String!
 }

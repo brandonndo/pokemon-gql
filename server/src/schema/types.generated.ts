@@ -16,17 +16,13 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Ability = {
-  __typename?: 'Ability';
-  name: Scalars['String']['output'];
-};
-
 export type Pokemon = {
   __typename?: 'Pokemon';
   base_experience: Scalars['Int']['output'];
   height: Scalars['Int']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  species: Species;
   url: Scalars['String']['output'];
   weight: Scalars['Int']['output'];
 };
@@ -48,7 +44,20 @@ export type Querypokemon_by_pkArgs = {
   id: Scalars['ID']['input'];
 };
 
+export type Species = {
+  __typename?: 'Species';
+  name: Scalars['String']['output'];
+  speciesDetails: SpeciesDetails;
+  url: Scalars['String']['output'];
+};
 
+export type SpeciesDetails = {
+  __typename?: 'SpeciesDetails';
+  is_legendary?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type WithIndex<TObject> = TObject & Record<string, any>;
+export type ResolversObject<TObject> = WithIndex<TObject>;
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
 
@@ -118,51 +127,62 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 
 /** Mapping between all available schema types and the resolvers types */
-export type ResolversTypes = {
-  Ability: ResolverTypeWrapper<Ability>;
-  String: ResolverTypeWrapper<Scalars['String']['output']>;
-  Pokemon: ResolverTypeWrapper<Pokemon>;
-  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
-  ID: ResolverTypeWrapper<Scalars['ID']['output']>;
+export type ResolversTypes = ResolversObject<{
+  Pokemon: ResolverTypeWrapper<Partial<Pokemon>>;
+  Int: ResolverTypeWrapper<Partial<Scalars['Int']['output']>>;
+  ID: ResolverTypeWrapper<Partial<Scalars['ID']['output']>>;
+  String: ResolverTypeWrapper<Partial<Scalars['String']['output']>>;
   Query: ResolverTypeWrapper<{}>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
-};
+  Species: ResolverTypeWrapper<Partial<Species>>;
+  SpeciesDetails: ResolverTypeWrapper<Partial<SpeciesDetails>>;
+  Boolean: ResolverTypeWrapper<Partial<Scalars['Boolean']['output']>>;
+}>;
 
 /** Mapping between all available schema types and the resolvers parents */
-export type ResolversParentTypes = {
-  Ability: Ability;
-  String: Scalars['String']['output'];
-  Pokemon: Pokemon;
-  Int: Scalars['Int']['output'];
-  ID: Scalars['ID']['output'];
+export type ResolversParentTypes = ResolversObject<{
+  Pokemon: Partial<Pokemon>;
+  Int: Partial<Scalars['Int']['output']>;
+  ID: Partial<Scalars['ID']['output']>;
+  String: Partial<Scalars['String']['output']>;
   Query: {};
-  Boolean: Scalars['Boolean']['output'];
-};
+  Species: Partial<Species>;
+  SpeciesDetails: Partial<SpeciesDetails>;
+  Boolean: Partial<Scalars['Boolean']['output']>;
+}>;
 
-export type AbilityResolvers<ContextType = any, ParentType extends ResolversParentTypes['Ability'] = ResolversParentTypes['Ability']> = {
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type PokemonResolvers<ContextType = any, ParentType extends ResolversParentTypes['Pokemon'] = ResolversParentTypes['Pokemon']> = {
+export type PokemonResolvers<ContextType = any, ParentType extends ResolversParentTypes['Pokemon'] = ResolversParentTypes['Pokemon']> = ResolversObject<{
   base_experience?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   height?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  species?: Resolver<ResolversTypes['Species'], ParentType, ContextType>;
   url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   weight?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
+}>;
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   pokemon?: Resolver<Array<ResolversTypes['Pokemon']>, ParentType, ContextType>;
   pokemon_by_name?: Resolver<Maybe<ResolversTypes['Pokemon']>, ParentType, ContextType, RequireFields<Querypokemon_by_nameArgs, 'name'>>;
   pokemon_by_pk?: Resolver<Maybe<ResolversTypes['Pokemon']>, ParentType, ContextType, RequireFields<Querypokemon_by_pkArgs, 'id'>>;
-};
+}>;
 
-export type Resolvers<ContextType = any> = {
-  Ability?: AbilityResolvers<ContextType>;
+export type SpeciesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Species'] = ResolversParentTypes['Species']> = ResolversObject<{
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  speciesDetails?: Resolver<ResolversTypes['SpeciesDetails'], ParentType, ContextType>;
+  url?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type SpeciesDetailsResolvers<ContextType = any, ParentType extends ResolversParentTypes['SpeciesDetails'] = ResolversParentTypes['SpeciesDetails']> = ResolversObject<{
+  is_legendary?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type Resolvers<ContextType = any> = ResolversObject<{
   Pokemon?: PokemonResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-};
+  Species?: SpeciesResolvers<ContextType>;
+  SpeciesDetails?: SpeciesDetailsResolvers<ContextType>;
+}>;
 

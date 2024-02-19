@@ -1,11 +1,10 @@
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./schema/typeDefs.generated";
 import { resolvers } from "./schema/resolvers.generated";
 
 const server = new ApolloServer({ typeDefs, resolvers });
+//@ts-ignore
+const { url } = await startStandaloneServer(server);
 
-server.listen().then(({ url }) => {
-  console.log(`server running at: ${url}`);
-}).catch((error) => {
-  console.log("error starting the server: ", error)
-})
+console.log(`Server Successfully Running at: ${url}`);

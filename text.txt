@@ -1,36 +1,34 @@
-import { Pokemon } from "./pokemon3";
-import type { QueryResolvers } from "../../../types.generated";
-const apiUrl = "https://pokeapi.co/api/v2/pokemon";
-
-interface Pokemon {
-  name: string;
-  url: string;
-  id: number;
-  base_experience: number;
-  height: number;
-  weight: number;
-}
-
-interface PokemonListReturn {
-  results: Array<Pokemon>;
-}
-
-let PokemonList: Pokemon[];
-
-export const pokemon: NonNullable<QueryResolvers["pokemon"]> = async (
-  _parent,
-  _arg,
-  _ctx
-) => {
-  /* Implement Query.pokemon resolver logic here */
-  const response = await globalThis.fetch(apiUrl);
-  const data: PokemonListReturn = await response.json();
-  console.log(data);
-
-  const PokemonList: Array<Pokemon> = data.results.map(
-    ({ name, url }: { name: string; url: string }) => {
-      return { name, url };
+{
+  "base_happiness": 35,
+  "capture_rate": 3,
+  "color": {
+    "name": "blue",
+    "url": "https://pokeapi.co/api/v2/pokemon-color/2/"
+  },
+  "egg_groups": [
+    {
+      "name": "no-eggs",
+      "url": "https://pokeapi.co/api/v2/egg-group/15/"
     }
-  );
-  return PokemonList;
-};
+  ],
+  "evolution_chain": {
+    "url": "https://pokeapi.co/api/v2/evolution-chain/73/"
+  },
+  "evolves_from_species": null,
+
+      
+  "form_descriptions": [],
+  "forms_switchable": false,
+  "gender_rate": -1,
+  
+
+ 
+  "has_gender_differences": false,
+  "hatch_counter": 80,
+  "id": 144,
+  "is_baby": false,
+  "is_legendary": true,
+  "is_mythical": false,
+  "name": "articuno",
+ 
+}
