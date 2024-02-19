@@ -34,8 +34,7 @@ export const pokemon: NonNullable<QueryResolvers['pokemon']> = async (
   // console.log('dres', data.results)
   // console.log(data);
 
-  console.log('parent', _parent)
-  const PokemonList = await Promise.all(
+   const PokemonList = await Promise.all(
     data.results.map(async (pokemon) => {
       const { id, height, weight, base_experience, species } =
         await fetchPokemonApi<PokemonApiReturn>(`${apiUrl}/${pokemon.name}`);
