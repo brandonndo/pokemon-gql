@@ -1,0 +1,7 @@
+type SpeciesDetails {
+  is_legendary: Boolean!
+}
+
+extend type Species {
+  speciesDetails: SpeciesDetails!
+}

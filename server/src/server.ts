@@ -1,11 +1,25 @@
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
 import { typeDefs } from "./schema/typeDefs.generated";
 import { resolvers } from "./schema/resolvers.generated";
+import { PokemonAPI } from "./schema/pokemon-api";
 
-const server = new ApolloServer({ typeDefs, resolvers });
+export interface ContextValue {
+  dataSources: {
+    pokemonAPI: PokemonAPI;
+  };
+}
 
-server.listen().then(({ url }) => {
-  console.log(`server running at: ${url}`);
-}).catch((error) => {
-  console.log("error starting the server: ", error)
-})
+const server = new ApolloServer<ContextValue>({ typeDefs, resolvers });
+const { url } = await startStandaloneServer(server, {
+  context: async () => {
+    const { cache } = server;
+    return {
+      dataSources: {
+        pokemonAPI: new PokemonAPI({ cache }),
+      },
+    };
+  },
+});
+
+console.log(`Server Successfully Running at: ${url}`);

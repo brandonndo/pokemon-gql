@@ -1,3 +1,0 @@
-type Ability {
-  name: String!
-}

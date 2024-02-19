@@ -18,7 +18,13 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.7.1",
     "typescript": "5.3.3",
-    "typescript-eslint": "^7.0.1"
+    "typescript-eslint": "^7.0.1",
+    "utility-types": "^3.11.0"
+  },
+  "dependencies": {
+    "@apollo/datasource-rest": "^6.2.2",
+    "@apollo/server": "^4.10.0",
+    "dataloader": "^2.2.2"
   },
   "author": "",
   "license": "ISC"
